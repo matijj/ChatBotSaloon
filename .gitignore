@@ -1,0 +1,7 @@
+.env
+keys.json
+sheet-env/
+
+__pycache__/
+*.pyc  
+ 

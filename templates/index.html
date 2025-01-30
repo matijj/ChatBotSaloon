@@ -6,8 +6,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=.2, user-scalable=no" />
 
-
-
   <style>
     df-messenger {
       --df-messenger-primary-color: #800080; /* Purple color for primary elements, including chips */
@@ -17,14 +15,22 @@
       --df-messenger-font-color: #000000; /* Black text for readability */
       --df-messenger-send-icon: #800080; /* Purple send icon */
 
-        /* RESPONSIVE FIX */
-        position: fixed;
-        bottom: 0;
-        right: 0;
+      /* RESPONSIVE FIX */
+      position: fixed;
+      bottom: 0;
+      right: 20px;
+      width: 100%;
+      max-width: 400px; /* Adjust for mobile */
+      height: 90vh; /* Ensures it doesn't take full screen */
+    } /* <- ✅ Added this closing bracket! */
+
+    @media screen and (max-width: 600px) {
+      df-messenger {
         width: 100%;
-        max-width: 400px; /* Adjust for mobile */
-        height: 80vh; /* Ensures it doesn't take full screen */
-    }
+        right: 0;
+        max-width: none;
+        height: 85vh; /* Adjust height */
+      }
 
       df-messenger::part(chat-container) {
         max-height: 75vh; /* Adjust chat window height */
@@ -38,8 +44,10 @@
       df-messenger::part(input-container) {
         width: 100%; /* Ensures input box fits */
       }
-
+    }
   </style>
+
+
 
 </head>
 

@@ -16,7 +16,29 @@
       --df-messenger-chat-background-color: #fafafa; /* Light background for better contrast */
       --df-messenger-font-color: #000000; /* Black text for readability */
       --df-messenger-send-icon: #800080; /* Purple send icon */
+
+        /* RESPONSIVE FIX */
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        max-width: 400px; /* Adjust for mobile */
+        height: 80vh; /* Ensures it doesn't take full screen */
     }
+
+      df-messenger::part(chat-container) {
+        max-height: 75vh; /* Adjust chat window height */
+      }
+
+      df-messenger::part(message-list) {
+        height: 60vh; /* Ensures chat messages don’t overflow */
+        overflow-y: auto; /* Enables scrolling */
+      }
+
+      df-messenger::part(input-container) {
+        width: 100%; /* Ensures input box fits */
+      }
+
   </style>
 
 </head>

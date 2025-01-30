@@ -120,38 +120,64 @@ def home():
 
 
 
-# Add static file serving
-@app.route('/static/<path:filename>', methods=['GET'])
+## Add static file serving
+#@app.route('/static/<path:filename>', methods=['GET'])
+#def serve_static_file(filename):
+#    """
+#    Serves static files such as images, CSS, or JavaScript from the 'static' directory.
+#
+#    Parameters:
+#        - filename (str): The relative path of the file being requested.
+#
+#    Returns:
+#        - Flask Response: Serves the requested file if it exists.
+#        - 404 Response: If the file is not found.
+#        - 500 Response: If an unexpected error occurs.
+#    """
+#
+#    try:
+#        # Path to the static directory
+#        static_dir = os.path.join(os.path.dirname(__file__), 'src/static')
+#        file_path = os.path.join(static_dir, filename)
+#
+#        # Check if the file exists
+#        if not os.path.exists(file_path):
+#            logging.warning(f"[app.py] Static file not found: {filename}")
+#            return jsonify({"error": f"Static file '{filename}' not found."}), 404
+#
+#        # Log and serve the file
+#        logging.info(f"[app.py] Serving static file: {filename}")
+#        return send_from_directory(static_dir, filename)
+#
+#    except Exception as e:
+#        logging.error(f"[app.py] Error serving static file '{filename}': {e}", exc_info=True)
+#        return jsonify({"error": "An error occurred while serving the static file."}), 500
+
+import os
+import logging
+from flask import Flask, send_from_directory, jsonify
+
+app = Flask(__name__)  # Keep this as is
+
+@app.route('/static/<path:filename>')
 def serve_static_file(filename):
     """
-    Serves static files such as images, CSS, or JavaScript from the 'static' directory.
-
-    Parameters:
-        - filename (str): The relative path of the file being requested.
-
-    Returns:
-        - Flask Response: Serves the requested file if it exists.
-        - 404 Response: If the file is not found.
-        - 500 Response: If an unexpected error occurs.
+    Serve static files (e.g., images) from the correct static directory.
     """
-
     try:
-        # Path to the static directory
-        static_dir = os.path.join(os.path.dirname(__file__), 'static')
-        file_path = os.path.join(static_dir, filename)
-
-        # Check if the file exists
-        if not os.path.exists(file_path):
+        static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'src/static'))  # ✅ Make sure path is absolute
+        
+        if not os.path.exists(os.path.join(static_dir, filename)):
             logging.warning(f"[app.py] Static file not found: {filename}")
             return jsonify({"error": f"Static file '{filename}' not found."}), 404
 
-        # Log and serve the file
         logging.info(f"[app.py] Serving static file: {filename}")
-        return send_from_directory(static_dir, filename)
+        return send_from_directory(static_dir, filename)  # ✅ This now serves correctly
 
     except Exception as e:
         logging.error(f"[app.py] Error serving static file '{filename}': {e}", exc_info=True)
         return jsonify({"error": "An error occurred while serving the static file."}), 500
+
 
 
 

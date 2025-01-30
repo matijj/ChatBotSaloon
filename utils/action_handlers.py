@@ -2952,7 +2952,8 @@ def handle_user_wants_tea_tree_shampoo(body: dict) -> dict:
                                 # Product Image
                                 {
                                     "type": "image",
-                                    "rawUrl": "http://localhost:5000/static/tea-tree-shampoo.jpg",
+                                    "rawUrl": "https://bot-salona-f40de31fc167.herokuapp.com/static/tea-tree-shampoo.jpg",
+
                                     "accessibilityText": "Paul Mitchell Tea Tree Special Shampoo"
                                 },
                                 # Product Description
@@ -3081,7 +3082,7 @@ def handle_user_wants_shampoo_one(body: dict) -> dict:
                                 # Product Image
                                 {
                                     "type": "image",
-                                    "rawUrl": "http://localhost:5000/static/shampoo-one.jpg",  # Update image path if needed
+                                    "rawUrl": "https://bot-salona-f40de31fc167.herokuapp.com/static/shampoo-one.jpg",  
                                     "accessibilityText": "Paul Mitchell Shampoo One"
                                 },
                                 # Product Description
@@ -3207,7 +3208,8 @@ def handle_user_wants_double_hitter_shampoo(body: dict) -> dict:
                                 # Product Image
                                 {
                                     "type": "image",
-                                    "rawUrl": "http://localhost:5000/static/double-hitter.jpg",  # Update image path if needed
+                                    "rawUrl": "https://bot-salona-f40de31fc167.herokuapp.com/static/double-hitter.jpg",  # Update image path if needed
+
                                     "accessibilityText": "MITCH by Paul Mitchell Double Hitter 2-in-1 Shampoo & Conditioner"
                                 },
                                 # Product Description

@@ -37,25 +37,6 @@
   language-code="en"
 ></df-messenger>
 
-    <!-- 💡 FIX: FORCE MOBILE MODE -->
-    <script>
-      window.addEventListener("dfMessengerLoaded", function() {
-        const dfMessenger = document.querySelector("df-messenger");
-
-        if (window.innerWidth <= 600) { 
-          dfMessenger.style.width = "100%";
-          dfMessenger.style.right = "0px";
-          dfMessenger.style.maxWidth = "none";
-          dfMessenger.style.height = "85vh";
-        }
-      });
-    </script>
-
-
-
-
-
-
 </body>
 
 

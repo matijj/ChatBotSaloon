@@ -191,12 +191,18 @@ def handle_user_wants_to_schedule_appointment(body: dict) -> dict:
         ]
 
         # Step 4: Build the Dialogflow response
-        response_data = format_dialogflow_response(
+        response_data = format_rich_response_with_chips(
             [
                 "Great! To schedule, let’s start with your name. What’s your name?"
             ],
+            chips=["Restart Chat"]
             output_contexts
         )
+
+
+
+
+
 
         # Step 5: Return the constructed response
         return response_data

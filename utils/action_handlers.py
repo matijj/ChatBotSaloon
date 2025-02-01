@@ -196,7 +196,7 @@ def handle_user_wants_to_schedule_appointment(body: dict) -> dict:
                 "Great! To schedule, let’s start with your name. What’s your name?"
             ],
             chips=["Restart Chat"],
-            output_contexts
+            output_contexts=output_contexts
         )
 
 
@@ -459,32 +459,6 @@ import pytz
 
 
 #-------------------------------------------------
-
-##WORKING_HOURS = {"start": 9, "end": 17}
-#from utils.config import WORKING_HOURS
-#
-#
-#def is_within_working_hours(date_time: str, timezone: str ="Europe/Belgrade" ) -> bool:
-#    try:
-#        # Parse and adjust to the user's timezone
-#        dt = datetime.fromisoformat(date_time)
-#        if dt.tzinfo is None:
-#            dt = pytz.timezone(timezone).localize(dt)
-#        local_time = dt.astimezone(pytz.timezone(timezone))
-#
-#        # Log the parsed and adjusted times
-#        logging.info(f"Input time: {date_time}, Local time: {local_time}, Hour: {local_time.hour}")
-#
-#        # Check working hours
-#        hour = local_time.hour
-#        return WORKING_HOURS["start"] <= hour < WORKING_HOURS["end"]
-#
-#    except Exception as e:
-#        logging.error(f"[is_within_working_hours] Error: {e}", exc_info=True)
-#        return False
-#
-
-
 
 
 def handle_user_provides_date_time(body: dict) -> dict:

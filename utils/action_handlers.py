@@ -2867,7 +2867,7 @@ def handle_user_wants_products(body: dict) -> dict:
 
 
             ],
-            chips=['Tea Tree Shampoo', 'Shampoo One', 'Double Hitter'],
+            chips=['Tea Tree Shampoo', 'Shampoo One', 'Double Hitter', 'Restart Chat'],
             output_contexts=output_contexts
         )
         logging.info("[handle_user_wants_products] Response data: %s", response_data)
@@ -2985,7 +2985,8 @@ def handle_user_wants_tea_tree_shampoo(body: dict) -> dict:
                                     "type": "chips",
                                     "options": [
                                         {"text": "View Other Products"},
-                                        {"text": "Schedule Appointment"}
+                                        {"text": "Schedule Appointment"},
+                                        {"text": "Restart Chat"}
                                     ]
                                 }
                             ]
@@ -3114,7 +3115,8 @@ def handle_user_wants_shampoo_one(body: dict) -> dict:
                                     "type": "chips",
                                     "options": [
                                         {"text": "View Other Products"},
-                                        {"text": "Schedule Appointment"}
+                                        {"text": "Schedule Appointment"},
+                                        {"text": "Restart Chat"}
                                     ]
                                 }
                             ]
@@ -3241,7 +3243,8 @@ def handle_user_wants_double_hitter_shampoo(body: dict) -> dict:
                                     "type": "chips",
                                     "options": [
                                         {"text": "View Other Products"},
-                                        {"text": "Schedule Appointment"}
+                                        {"text": "Schedule Appointment"},
+                                        {"text": "Restart Chat"}
                                     ]
                                 }
                             ]

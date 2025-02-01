@@ -312,13 +312,17 @@ def handle_user_provides_name(body: dict) -> dict:
         output_contexts = build_contexts(session, 'await-email', session_parameters)
 
         # Step 7: Build and return the response for Dialogflow
-        response_data = format_dialogflow_response(
+        response_data = format_rich_response_with_chips(
             [
                 f"Thanks for your name, {user_name}! What’s your email?"
             ],
-            output_contexts
+            chips=["Restart Chat"],
+            output_contexts=output_contexts
+
         )
         return response_data
+
+
 
     except ValueError as ve:
         # Handle cases where session extraction or parameters are invalid
@@ -416,11 +420,14 @@ def handle_user_provides_email(body: dict) -> dict:
 
 
         # Step 5: Construct and return the Dialogflow response
-        response_data = format_dialogflow_response(
+        response_data = format_rich_response_with_chips(
             ["Thanks! What date and time works for you? Example: Tomorrow at 1 pm or January 10th at 22h."],
-            output_contexts
+            chips=["Restart Chat"],
+            output_contexts=output_contexts
         )
         return response_data
+
+
 
     except ValueError as ve:
         logging.warning(f"[handle_user_provides_email] Validation error: {ve}")

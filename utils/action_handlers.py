@@ -1010,85 +1010,183 @@ def handle_user_confirms_note(body: dict) -> dict:
 
 #----------------------------------------------------------------------
 
+#    """
+#    Handles the scenario where the user provides a note during a Dialogflow interaction.
+#
+#    Purpose:
+#    --------
+#    This function:
+#    - Extracts and validates the user-provided note.
+#    - Updates session parameters with the note.
+#    - Prepares a summary of all collected information (name, email, date/time, and note).
+#    - Prompts the user to confirm or update their information.
+#
+#    Parameters:
+#    ------------
+#    - body (dict): Dialogflow webhook request payload containing user input, session details, 
+#      and output contexts.
+#
+#    Returns:
+#    ---------
+#    - dict: A structured response formatted for Dialogflow, providing a confirmation message 
+#      and Yes/No options for further updates.
+#
+#    Steps:
+#    ------
+#    1. Extract session ID and output contexts from the Dialogflow payload.
+#    2. Retrieve session parameters and validate them.
+#    3. Extract the note provided by the user (or assign a default if missing).
+#    4. Store the note in session parameters and prepare a summary of all information collected.
+#    5. Build updated contexts for the next step (awaiting confirmation).
+#    6. Return a response with a confirmation message and Yes/No chips.
+#
+#    Error Handling:
+#    ---------------
+#    - Handles missing or invalid session parameters with user-friendly error messages.
+#    - Logs unexpected runtime errors and provides a fallback response.
+#
+#    Dependencies:
+#    --------------
+#    - Utility functions:
+#        - `extract_session`
+#        - `extract_output_contexts`
+#        - `extract_session_parameters`
+#        - `build_contexts`
+#        - `format_rich_response_with_chips`
+#    """
+
+
+
+
+#def handle_user_provides_note(body: dict) -> dict:
+#    try:
+#        # Step 1: Extract session and output contexts
+#
+#        logging.info("[handle_user_provides_note] Entering function.")
+#
+#
+#        session = extract_session(body)
+#
+#
+#        if not session:
+#            logging.error("[handle_user_provides_note] FAILED: Could not extract session!")
+#            return format_dialogflow_response(["Something went wrong. Please try again later."], [])
+#
+#
+#        output_contexts = extract_output_contexts(body)
+#
+#        if not output_contexts:
+#            logging.error("[handle_user_provides_note] FAILED: Could not extract output contexts!")
+#            return format_dialogflow_response(["Something went wrong. Please try again later."], [])
+#
+#
+#
+#        session_parameters = extract_session_parameters(output_contexts)
+#        logging.info("[handle_user_provides_note] Session parameters: %s", session_parameters)
+#
+#
+#
+#        # Step 2: Extract and validate the user-provided note
+#        user_note = body['queryResult']['parameters'].get('any', '').strip()
+#        if not user_note:
+#            user_note = "No note provided"
+#
+#
+#
+#        # Step 3: Store the note in session parameters
+#        session_parameters['note'] = user_note
+#
+#        # Step 4: Extract other session parameters for summary
+#        name = session_parameters.get("person", "unknown")
+#        email = session_parameters.get("email", "unknown")
+#        #date_time_data = session_parameters.get("date_time", "unknown")
+#        #date_time = date_time_data.get("date_time", "unknown") if isinstance(date_time_data, dict) else date_time_data
+#        date_time = session_parameters.get("date_time", "unknown")
+#
+#
+#        if date_time != "unknown":
+#            try:
+#                # Format date-time into a readable format (e.g., "2025-01-29 10:00 h")
+#                date_time = datetime.fromisoformat(date_time).strftime("%Y-%m-%d %H:%M h")
+#            except ValueError:
+#                logging.warning("[handle_user_provides_note] Invalid date_time format, using raw value.")
+#
+#
+#
+#
+#
+#        note = session_parameters['note']
+#
+#        # Step 5: Prepare the confirmation message with the collected information
+#        confirmation_message = (
+#            f"Great! Here’s the information I have:\n"
+#            f"- Name: {name}\n"
+#            f"- Email: {email}\n"
+#            f"- Date and Time: {datetime.fromisoformat(date_time).strftime('%Y-%m-%d at %I:%M %p') if date_time != 'unknown' else 'unknown'}\n"
+#            f"- Note: {note}\n"
+#            "Do you want to update anything?"
+#
+#        )
+#
+#
+#
+#        # Step 6: Build updated contexts for the next step
+#        output_contexts = build_contexts(session, 'await-confirmation', session_parameters)
+#
+#        # Step 7: Build response with confirmation message and Yes/No chips
+#        response_data = format_rich_response_with_chips(
+#            [confirmation_message],
+#            chips=["Yes", "No"],
+#            output_contexts=output_contexts
+#        )
+#        return response_data
+#
+#    except ValueError:
+#        logging.warning("[handle_user_provides_note] Invalid session or output contexts.")
+#        return {
+#            "fulfillmentMessages": [
+#                {"text": {"text": ["Something went wrong. Please try again later."]}}
+#            ]
+#        }
+#    except Exception as e:
+#        logging.error("[handle_user_provides_note] Unexpected error occurred.", exc_info=True)
+#        return {
+#            "fulfillmentMessages": [
+#                {"text": {"text": ["An unexpected error occurred. Please try again later."]}}
+#            ]
+#        }
+#
+#
+
+
+
+
 def handle_user_provides_note(body: dict) -> dict:
-    """
-    Handles the scenario where the user provides a note during a Dialogflow interaction.
-
-    Purpose:
-    --------
-    This function:
-    - Extracts and validates the user-provided note.
-    - Updates session parameters with the note.
-    - Prepares a summary of all collected information (name, email, date/time, and note).
-    - Prompts the user to confirm or update their information.
-
-    Parameters:
-    ------------
-    - body (dict): Dialogflow webhook request payload containing user input, session details, 
-      and output contexts.
-
-    Returns:
-    ---------
-    - dict: A structured response formatted for Dialogflow, providing a confirmation message 
-      and Yes/No options for further updates.
-
-    Steps:
-    ------
-    1. Extract session ID and output contexts from the Dialogflow payload.
-    2. Retrieve session parameters and validate them.
-    3. Extract the note provided by the user (or assign a default if missing).
-    4. Store the note in session parameters and prepare a summary of all information collected.
-    5. Build updated contexts for the next step (awaiting confirmation).
-    6. Return a response with a confirmation message and Yes/No chips.
-
-    Error Handling:
-    ---------------
-    - Handles missing or invalid session parameters with user-friendly error messages.
-    - Logs unexpected runtime errors and provides a fallback response.
-
-    Dependencies:
-    --------------
-    - Utility functions:
-        - `extract_session`
-        - `extract_output_contexts`
-        - `extract_session_parameters`
-        - `build_contexts`
-        - `format_rich_response_with_chips`
-    """
-
     try:
-        # Step 1: Extract session and output contexts
-
         logging.info("[handle_user_provides_note] Entering function.")
 
-
+        # Step 1: Extract session and output contexts
         session = extract_session(body)
-
-
         if not session:
-            logging.error("[handle_user_provides_note] FAILED: Could not extract session!")
-            return format_dialogflow_response(["Something went wrong. Please try again later."], [])
-
+            logging.error("[handle_user_provides_note] ERROR: Could not extract session!")
+            return format_dialogflow_response(["Session error. Please restart the chat."], [])
 
         output_contexts = extract_output_contexts(body)
-
         if not output_contexts:
-            logging.error("[handle_user_provides_note] FAILED: Could not extract output contexts!")
-            return format_dialogflow_response(["Something went wrong. Please try again later."], [])
-
-
+            logging.error("[handle_user_provides_note] ERROR: Could not extract output contexts!")
+            return format_dialogflow_response(["Context error. Please restart the chat."], [])
 
         session_parameters = extract_session_parameters(output_contexts)
+        if not session_parameters:
+            logging.error("[handle_user_provides_note] ERROR: No session parameters found!")
+            return format_dialogflow_response(["Something went wrong. Try again."], [])
+
         logging.info("[handle_user_provides_note] Session parameters: %s", session_parameters)
-
-
 
         # Step 2: Extract and validate the user-provided note
         user_note = body['queryResult']['parameters'].get('any', '').strip()
         if not user_note:
             user_note = "No note provided"
-
-
 
         # Step 3: Store the note in session parameters
         session_parameters['note'] = user_note
@@ -1096,22 +1194,14 @@ def handle_user_provides_note(body: dict) -> dict:
         # Step 4: Extract other session parameters for summary
         name = session_parameters.get("person", "unknown")
         email = session_parameters.get("email", "unknown")
-        #date_time_data = session_parameters.get("date_time", "unknown")
-        #date_time = date_time_data.get("date_time", "unknown") if isinstance(date_time_data, dict) else date_time_data
-
         date_time = session_parameters.get("date_time", "unknown")
 
-
+        # Format date-time if it's available
         if date_time != "unknown":
             try:
-                # Format date-time into a readable format (e.g., "2025-01-29 10:00 h")
                 date_time = datetime.fromisoformat(date_time).strftime("%Y-%m-%d %H:%M h")
             except ValueError:
                 logging.warning("[handle_user_provides_note] Invalid date_time format, using raw value.")
-
-
-
-
 
         note = session_parameters['note']
 
@@ -1120,16 +1210,21 @@ def handle_user_provides_note(body: dict) -> dict:
             f"Great! Here’s the information I have:\n"
             f"- Name: {name}\n"
             f"- Email: {email}\n"
-            f"- Date and Time: {datetime.fromisoformat(date_time).strftime('%Y-%m-%d at %I:%M %p') if date_time != 'unknown' else 'unknown'}\n"
+            f"- Date and Time: {date_time if date_time != 'unknown' else 'unknown'}\n"
             f"- Note: {note}\n"
             "Do you want to update anything?"
-
         )
 
-
-
-        # Step 6: Build updated contexts for the next step
-        output_contexts = build_contexts(session, 'await-confirmation', session_parameters)
+        # Step 6: Preserve existing output contexts instead of overwriting them
+        output_contexts.append({
+            'name': f'{session}/contexts/await-confirmation',
+            'lifespanCount': 1
+        })
+        output_contexts.append({
+            'name': f'{session}/contexts/session-parameters',
+            'lifespanCount': 99,
+            'parameters': session_parameters
+        })
 
         # Step 7: Build response with confirmation message and Yes/No chips
         response_data = format_rich_response_with_chips(
@@ -1141,18 +1236,16 @@ def handle_user_provides_note(body: dict) -> dict:
 
     except ValueError:
         logging.warning("[handle_user_provides_note] Invalid session or output contexts.")
-        return {
-            "fulfillmentMessages": [
-                {"text": {"text": ["Something went wrong. Please try again later."]}}
-            ]
-        }
+        return format_dialogflow_response(["Something went wrong. Please try again later."], [])
+
     except Exception as e:
         logging.error("[handle_user_provides_note] Unexpected error occurred.", exc_info=True)
-        return {
-            "fulfillmentMessages": [
-                {"text": {"text": ["An unexpected error occurred. Please try again later."]}}
-            ]
-        }
+        return format_dialogflow_response(["An unexpected error occurred. Please try again later."], [])
+
+
+
+
+
 
 #------------------------------------------------------------------------------------------
 

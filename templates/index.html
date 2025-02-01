@@ -8,42 +8,12 @@
 
   <style>
     df-messenger {
-      --df-messenger-primary-color: #800080; /* Purple color for primary elements, including chips */
+      --df-messenger-primary-color: #FFF; /* Purple color for primary elements, including chips */
       --df-messenger-bot-message: #f3e5f5; /* Light lavender for bot messages */
       --df-messenger-user-message: #d4a5ff; /* Soft purple for user messages */
       --df-messenger-chat-background-color: #fafafa; /* Light background for better contrast */
       --df-messenger-font-color: #000000; /* Black text for readability */
       --df-messenger-send-icon: #800080; /* Purple send icon */
-
-      /* RESPONSIVE FIX */
-      position: fixed;
-      bottom: 0;
-      right: 20px;
-      width: 100%;
-      max-width: 400px; /* Adjust for mobile */
-      height: 90vh; /* Ensures it doesn't take full screen */
-    } /* <- ✅ Added this closing bracket! */
-
-    @media screen and (max-width: 600px) {
-      df-messenger {
-        width: 100%;
-        right: 0;
-        max-width: none;
-        height: 85vh; /* Adjust height */
-      }
-
-      df-messenger::part(chat-container) {
-        max-height: 75vh; /* Adjust chat window height */
-      }
-
-      df-messenger::part(message-list) {
-        height: 60vh; /* Ensures chat messages don’t overflow */
-        overflow-y: auto; /* Enables scrolling */
-      }
-
-      df-messenger::part(input-container) {
-        width: 100%; /* Ensures input box fits */
-      }
     }
   </style>
 

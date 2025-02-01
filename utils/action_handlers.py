@@ -1058,14 +1058,37 @@ def handle_user_provides_note(body: dict) -> dict:
 
     try:
         # Step 1: Extract session and output contexts
+
+        logging.info("[handle_user_provides_note] Entering function.")
+
+
         session = extract_session(body)
+
+
+        if not session:
+            logging.error("[handle_user_provides_note] FAILED: Could not extract session!")
+            return format_dialogflow_response(["Something went wrong. Please try again later."], [])
+
+
         output_contexts = extract_output_contexts(body)
+
+        if not output_contexts:
+            logging.error("[handle_user_provides_note] FAILED: Could not extract output contexts!")
+            return format_dialogflow_response(["Something went wrong. Please try again later."], [])
+
+
+
         session_parameters = extract_session_parameters(output_contexts)
+        logging.info("[handle_user_provides_note] Session parameters: %s", session_parameters)
+
+
 
         # Step 2: Extract and validate the user-provided note
         user_note = body['queryResult']['parameters'].get('any', '').strip()
         if not user_note:
             user_note = "No note provided"
+
+
 
         # Step 3: Store the note in session parameters
         session_parameters['note'] = user_note

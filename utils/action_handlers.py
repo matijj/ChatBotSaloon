@@ -195,7 +195,7 @@ def handle_user_wants_to_schedule_appointment(body: dict) -> dict:
             [
                 "Great! To schedule, let’s start with your name. What’s your name?"
             ],
-            chips=["Restart Chat"]
+            chips=["Restart Chat"],
             output_contexts
         )
 

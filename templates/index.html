@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 <title>Chatbot Page</title>
 
 <head>
@@ -22,26 +21,6 @@
 
 
 
-        /* Mobile Responsive Fix */
-        @media screen and (max-width: 600px) {
-            df-messenger {
-                --df-messenger-chat-background-color: #ffffff;
-            }
-
-            /* Increase chat widget icon size */
-            #widgetIcon {
-                width: 60px !important;
-                height: 60px !important;
-                bottom: 20px !important;
-                right: 20px !important;
-            }
-
-            #widgetIcon svg {
-                width: 60px !important;
-                height: 60px !important;
-            }
-        }
-
   </style>
 
 
@@ -58,32 +37,6 @@
   agent-id="b8c3271f-75b5-4b6e-913c-d03c021088fc"
   language-code="en"
 ></df-messenger>
-
-
-    <!-- Mobile Responsiveness Fix for Chat Widget (Shadow DOM) -->
-    <script>
-        window.addEventListener("dfMessengerLoaded", function () {
-            const dfMessenger = document.querySelector("df-messenger");
-            const chatWrapper = dfMessenger.shadowRoot.querySelector("df-messenger-chat").shadowRoot;
-
-            // Inject styles into Shadow DOM
-            const style = document.createElement("style");
-            style.textContent = `
-                @media screen and (max-width: 600px) {
-                    .chat-wrapper {
-                        bottom: 0 !important;
-                        right: 0 !important;
-                        width: 100% !important;
-                        height: 85vh !important;
-                    }
-                    .chat-wrapper[opened="true"] {
-                        height: 85vh !important;
-                    }
-                }
-            `;
-            chatWrapper.appendChild(style);
-        });
-    </script>
 
 
 </body>

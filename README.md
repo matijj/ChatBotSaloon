@@ -136,11 +136,11 @@ Heroku Deployment Docs
 
 
 ### **🛠 Future Improvements**
-**✅ Dynamic Fallback Recovery** – Make the chatbot answer open-ended fallback questions instead of just predefined responses.
 
-**✅ Timezone Adjustments** – Currently, the bot assumes a fixed timezone. Implement dynamic timezone handling for users worldwide.
+** Timezone Adjustments** – Currently, the bot assumes a fixed timezone. Implement dynamic timezone handling for users worldwide.
 
-**✅ LLM Integration for Responses** – Instead of predefined messages, use GPT for more natural responses.
+** Improve Email Validation Handling ** – Right now, if a user forgets special characters like @, the bot just throws an error instead of explaining what’s wrong. Fix the validation logic to provide clear feedback to the user.
 
+** Fix "10h" Time Parsing Bug ** – When users enter times like "10h" or "6h", the bot always defaults to 12:00 H instead of the correct hour. Other formats (like "10 AM" or "tomorrow 10") work fine. Investigate and fix the parsing issue.
 
  

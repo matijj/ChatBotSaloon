@@ -38,15 +38,14 @@ cd <your-project-folder>
 ### **Create a Virtual Environment & Install Dependencies**
 ```bash
 python -m venv venv
-venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 
 ### **Set Up Environment Variables**
 ```bash
-PORT=5000
 OPENAI_API_KEY=
+PORT=5000
 CREDENTIALS=
 CALENDAR_ID=
 ```

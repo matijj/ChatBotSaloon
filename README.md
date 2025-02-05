@@ -105,18 +105,34 @@ Heroku Deployment Docs
 
 
 ### **📂 Code Structure**
+```bash
 📦 your-project-folder
 │-- 📂 src
-│   │-- app.py              # Main Flask app handling requests
-│   │-- action_handlers.py   # Handles different user actions
-│   │-- calendar_services.py # Manages Google Calendar API calls
-│   │-- helper_functions.py  # Utility functions for validation, logging, etc.
-│-- 📂 templates
-│   │-- index.html           # Chatbot UI
-│-- run.py                   # Starts the Flask app
-│-- config.py                 # Configuration settings
+│   ├── app.py               # Main Flask app handling requests
+│
+│-- 📂 static                 # Stores static assets (e.g., images)
+│   ├── double-hitter.jpg
+│   ├── shampoo-one.jpg
+│   ├── tea-tree-shampoo.jpg
+│
+│-- 📂 templates              # Contains chatbot UI
+│   ├── index.html
+│
+│-- 📂 tests                  # Contains test cases (not detailed here)
+│
+│-- 📂 utils                   # Contains helper modules
+│   ├── action_handlers.py    # Handles different user actions
+│   ├── calendar_services.py  # Manages Google Calendar API calls
+│   ├── config.py             # Configuration settings
+│   ├── helper_functions.py   # Utility functions for validation, logging, etc.
+│
+│-- .python-version           # Python version file
+│-- Procfile                  # Heroku process file
+│-- README.md                 # Documentation
 │-- requirements.txt          # Dependencies
-│-- README.md                 # This file
+│-- run.py                    # Starts the Flask app
+
+```
 
 
 ### **🛠 Future Improvements**

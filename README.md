@@ -70,9 +70,9 @@ https://988d-79-101-72-162.ngrok-free.app
 
 ### **Connect Webhook to Dialogflow**
 
-In the Dialogflow Console:
-1.Go to Fulfillment > Webhook
-Set the webhook URL to:
+#### In the Dialogflow Console:
+#### 1.Go to Fulfillment > Webhook
+#### 2.Set the webhook URL to:
 
 ```bash
 https://YOUR_NGROK_URL/webhook
@@ -96,7 +96,7 @@ This bot is deployed on Heroku, but it can run on any platform that supports Fla
 If you want to deploy it on Heroku, follow their official guide:
 Heroku Deployment Docs
 
-🔗 Live Demo: [YOUR_HEROKU_LINK]
+🔗 Live Demo: https://bot-salona-f40de31fc167.herokuapp.com/
 
 
 
@@ -105,8 +105,6 @@ Heroku Deployment Docs
 
 
 ### **📂 Code Structure**
-lua
-Copy
 📦 your-project-folder
 │-- 📂 src
 │   │-- app.py              # Main Flask app handling requests

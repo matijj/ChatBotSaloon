@@ -137,6 +137,8 @@ Heroku Deployment Docs
 
 ### **🛠 Future Improvements**
 
+** Works best with round numbers for now **
+
 ** Timezone Adjustments** – Currently, the bot assumes a fixed timezone. Implement dynamic timezone handling for users worldwide.
 
 ** Improve Email Validation Handling ** – Right now, if a user forgets special characters like @, the bot just throws an error instead of explaining what’s wrong. Fix the validation logic to provide clear feedback to the user.

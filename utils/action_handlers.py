@@ -222,10 +222,7 @@ def handle_user_wants_to_schedule_appointment(body: dict) -> dict:
         }
 
 
-
-#------------------------------------------------------------------------------------------------
-
-#RADI  
+ 
 
 def handle_user_provides_name(body: dict) -> dict:
     """
@@ -449,13 +446,6 @@ def handle_user_provides_email(body: dict) -> dict:
 
 
 #---------------------------------------------------------------------------
-
-#----------------------------------------------------------------------------------------
-#----------------------------------------------------------------------------------------
-#----------------------------------------------------------------------------------------
-
-
-
 #USER PROVIDES TIME
 from utils.calendar_services import get_free_busy,build_slot_check_contexts
 
@@ -465,7 +455,6 @@ from datetime import datetime, timedelta
 import pytz
 
 
-#-------------------------------------------------
 
 
 def handle_user_provides_date_time(body: dict) -> dict:
@@ -511,11 +500,6 @@ def handle_user_provides_date_time(body: dict) -> dict:
                 )
 
 
-   
-
-   #----------------
-
-        # NEW: Step 3 - Validate working hours
         user_timezone = session_parameters.get("timezone", "Europe/Belgrade")
 
         if not user_timezone:  # If timezone is empty, fallback to the default
@@ -1005,161 +989,6 @@ def handle_user_confirms_note(body: dict) -> dict:
         }
 
 
- 
-
-
-#----------------------------------------------------------------------
-
-#    """
-#    Handles the scenario where the user provides a note during a Dialogflow interaction.
-#
-#    Purpose:
-#    --------
-#    This function:
-#    - Extracts and validates the user-provided note.
-#    - Updates session parameters with the note.
-#    - Prepares a summary of all collected information (name, email, date/time, and note).
-#    - Prompts the user to confirm or update their information.
-#
-#    Parameters:
-#    ------------
-#    - body (dict): Dialogflow webhook request payload containing user input, session details, 
-#      and output contexts.
-#
-#    Returns:
-#    ---------
-#    - dict: A structured response formatted for Dialogflow, providing a confirmation message 
-#      and Yes/No options for further updates.
-#
-#    Steps:
-#    ------
-#    1. Extract session ID and output contexts from the Dialogflow payload.
-#    2. Retrieve session parameters and validate them.
-#    3. Extract the note provided by the user (or assign a default if missing).
-#    4. Store the note in session parameters and prepare a summary of all information collected.
-#    5. Build updated contexts for the next step (awaiting confirmation).
-#    6. Return a response with a confirmation message and Yes/No chips.
-#
-#    Error Handling:
-#    ---------------
-#    - Handles missing or invalid session parameters with user-friendly error messages.
-#    - Logs unexpected runtime errors and provides a fallback response.
-#
-#    Dependencies:
-#    --------------
-#    - Utility functions:
-#        - `extract_session`
-#        - `extract_output_contexts`
-#        - `extract_session_parameters`
-#        - `build_contexts`
-#        - `format_rich_response_with_chips`
-#    """
-
-
-
-
-#def handle_user_provides_note(body: dict) -> dict:
-#    try:
-#        # Step 1: Extract session and output contexts
-#
-#        logging.info("[handle_user_provides_note] Entering function.")
-#
-#
-#        session = extract_session(body)
-#
-#
-#        if not session:
-#            logging.error("[handle_user_provides_note] FAILED: Could not extract session!")
-#            return format_dialogflow_response(["Something went wrong. Please try again later."], [])
-#
-#
-#        output_contexts = extract_output_contexts(body)
-#
-#        if not output_contexts:
-#            logging.error("[handle_user_provides_note] FAILED: Could not extract output contexts!")
-#            return format_dialogflow_response(["Something went wrong. Please try again later."], [])
-#
-#
-#
-#        session_parameters = extract_session_parameters(output_contexts)
-#        logging.info("[handle_user_provides_note] Session parameters: %s", session_parameters)
-#
-#
-#
-#        # Step 2: Extract and validate the user-provided note
-#        user_note = body['queryResult']['parameters'].get('any', '').strip()
-#        if not user_note:
-#            user_note = "No note provided"
-#
-#
-#
-#        # Step 3: Store the note in session parameters
-#        session_parameters['note'] = user_note
-#
-#        # Step 4: Extract other session parameters for summary
-#        name = session_parameters.get("person", "unknown")
-#        email = session_parameters.get("email", "unknown")
-#        #date_time_data = session_parameters.get("date_time", "unknown")
-#        #date_time = date_time_data.get("date_time", "unknown") if isinstance(date_time_data, dict) else date_time_data
-#        date_time = session_parameters.get("date_time", "unknown")
-#
-#
-#        if date_time != "unknown":
-#            try:
-#                # Format date-time into a readable format (e.g., "2025-01-29 10:00 h")
-#                date_time = datetime.fromisoformat(date_time).strftime("%Y-%m-%d %H:%M h")
-#            except ValueError:
-#                logging.warning("[handle_user_provides_note] Invalid date_time format, using raw value.")
-#
-#
-#
-#
-#
-#        note = session_parameters['note']
-#
-#        # Step 5: Prepare the confirmation message with the collected information
-#        confirmation_message = (
-#            f"Great! Here’s the information I have:\n"
-#            f"- Name: {name}\n"
-#            f"- Email: {email}\n"
-#            f"- Date and Time: {datetime.fromisoformat(date_time).strftime('%Y-%m-%d at %I:%M %p') if date_time != 'unknown' else 'unknown'}\n"
-#            f"- Note: {note}\n"
-#            "Do you want to update anything?"
-#
-#        )
-#
-#
-#
-#        # Step 6: Build updated contexts for the next step
-#        output_contexts = build_contexts(session, 'await-confirmation', session_parameters)
-#
-#        # Step 7: Build response with confirmation message and Yes/No chips
-#        response_data = format_rich_response_with_chips(
-#            [confirmation_message],
-#            chips=["Yes", "No"],
-#            output_contexts=output_contexts
-#        )
-#        return response_data
-#
-#    except ValueError:
-#        logging.warning("[handle_user_provides_note] Invalid session or output contexts.")
-#        return {
-#            "fulfillmentMessages": [
-#                {"text": {"text": ["Something went wrong. Please try again later."]}}
-#            ]
-#        }
-#    except Exception as e:
-#        logging.error("[handle_user_provides_note] Unexpected error occurred.", exc_info=True)
-#        return {
-#            "fulfillmentMessages": [
-#                {"text": {"text": ["An unexpected error occurred. Please try again later."]}}
-#            ]
-#        }
-#
-#
-
-
-
 
 def handle_user_provides_note(body: dict) -> dict:
     try:
@@ -1249,15 +1078,10 @@ def handle_user_provides_note(body: dict) -> dict:
 
 #------------------------------------------------------------------------------------------
 
-#------------------------------------------------
-#NOVI USER NO CHANGE SA CALENDAROM UMESTO SHEETOM
-
 from datetime import datetime
 from utils.calendar_services import create_event
 from utils.helper_functions import extract_session_parameters
 
-
-#ZBOG INSOMNIE NE VALJA DODAO SI OVAJ DOLE ZBOG TOGa
 def handle_user_confirms_no_changes(body: dict) -> dict:
     """
     Handles the scenario where the user confirms that no changes are needed.
@@ -1408,9 +1232,6 @@ def handle_user_confirms_no_changes(body: dict) -> dict:
 
 
 #------------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------------
-
-
 
 
 
@@ -1949,7 +1770,6 @@ def handle_user_chooses_note(body: dict) -> dict:
 
 #------------------------------------------------------------------------------------------
 #RESPONSE FOR USER UPDATES NAME
-#SA VALIDACIOM
 
 def handle_user_updates_name(body: dict) -> dict:
     """
@@ -2181,7 +2001,7 @@ def handle_user_updates_email(body: dict) -> dict:
         )
 
 #------------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------------
+
 #RESPONSE FOR USER WANTS TO UPDATES DATE-TIME 
 
 
@@ -2500,7 +2320,6 @@ def handle_user_confirms_slot_update(body: dict) -> dict:
 
 #-----------------------------------------------------------------------------------------
 #USER DENIES SLOT UPDATE
-#NOVOOOOOOO:wq
 
 #NISI TESTIRAO
 def handle_user_denies_slot_update(body: dict) -> dict:
@@ -2581,12 +2400,8 @@ def handle_user_denies_slot_update(body: dict) -> dict:
 
 
 #------------------------------------------------------------------------------------------
-
-
 #RESPONSE FOR USER WANTS TO UPDATES NOTEe
 
-
-#nisi testirao
 def handle_user_updates_note(body: dict) -> dict:
     """
     Handles the scenario where the user provides an updated note.

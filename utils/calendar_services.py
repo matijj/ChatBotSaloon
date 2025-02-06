@@ -62,15 +62,10 @@ except json.JSONDecodeError as e:
 # Initialize the Google Calendar client
 credentials = Credentials.from_service_account_info(service_account, scopes=["https://www.googleapis.com/auth/calendar"])
 calendar = build("calendar", "v3", credentials=credentials)
-#
 
 
-#-------------------------------------------
 from datetime import datetime, timedelta
 import pytz
-
-
-#-------------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------------------------------------
@@ -129,19 +124,6 @@ def create_event(summary: str, description: str, start_time: str, time_zone: str
 #------------------------------------------------------------------------------------------------------------------------
 
 
-
-
-
-
-
-#--------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------
-
-#
 def build_slot_check_contexts(session: str, next_context: str, session_parameters: dict, lifespan: int = 1) -> list:
     """
     Builds output contexts for Dialogflow slot-checking and transitions to the next action.
@@ -182,14 +164,7 @@ def build_slot_check_contexts(session: str, next_context: str, session_parameter
         }
     ]
 
-
-
-#--------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------
-
+--------------------------------------------------------------------------------------
 
 def get_free_busy(start_time: str, end_time: str, timezone: str) -> list:
     """
@@ -266,7 +241,6 @@ def get_free_busy(start_time: str, end_time: str, timezone: str) -> list:
 #FUNCTION FOR USER PROVIDES DATE TIME AND USER UPDATES DATE TIME
 
 
-#bez logova
 def extract_and_validate_date_time(body: dict, context_name: str, session_parameters: dict) -> tuple[bool, str]:
     """
     Extracts and validates the date-time parameter from the request body.
@@ -295,20 +269,7 @@ def extract_and_validate_date_time(body: dict, context_name: str, session_parame
         return False, ''
 
     return True, date_time_value
-
-
-
-#DODAVANJE ZA EUROPIAN STYLE
-import re  # For handling normalization
-
-
-
-
-
-
-
-
-
+   
 #------------------------------------------------------------------------------------
 
 def convert_to_utc_and_store(date_time: str, session_parameters: dict, timezone: str = "UTC") -> dict:

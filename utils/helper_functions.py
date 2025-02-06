@@ -38,7 +38,6 @@ All functions are designed to be modular and reusable, with error handling and l
 import re
 
 import logging
-#RADI OVAJ ALI GPT OCE OVAJ DOLE BOLJI ZA ERRO HANDLING
 def format_dialogflow_response(messages: list[str], output_contexts: list[dict] = None) -> dict:
     """
     Formats a response for Dialogflow's fulfillment API.
@@ -357,10 +356,6 @@ def get_system_message():
 
 
 #--------------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------------
-
-
-#BEZ LOGOVA 
 
 
 def extract_session_parameters(output_contexts):
@@ -543,8 +538,6 @@ def build_contexts(session: str, next_context: str, session_parameters: dict, li
 
 
 #--------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------
 
 
 def extract_session(body: dict) -> str:
@@ -596,10 +589,6 @@ def extract_session(body: dict) -> str:
         logging.error(f"[extract_session] Error extracting session: {e}")
         raise
 
-
-
-
-#--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
 
@@ -635,8 +624,6 @@ def extract_output_contexts(body: dict) -> list:
         raise
 
 
-
-#----------------------------------------
 from utils.config import WORKING_HOURS
 
 
